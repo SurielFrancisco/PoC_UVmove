@@ -26,7 +26,11 @@ const mockVehicles: Vehicle[] = [
   },
 ];
 
-export const VehiclesPage = () => {
+interface VehiclesPageProps {
+  onSelectVehicle: (vehicle: Vehicle) => void;
+}
+
+export const VehiclesPage = ({ onSelectVehicle }: VehiclesPageProps) => {
   const [locationFilter, setLocationFilter] = useState('Todas las estaciones');
   const [typeFilter, setTypeFilter] = useState('Todos los tipos');
 
@@ -56,7 +60,11 @@ export const VehiclesPage = () => {
         <div className="flex flex-col">
           {filteredVehicles.length > 0 ? (
             filteredVehicles.map((vehicle) => (
-              <VehicleCard key={vehicle.id} vehicle={vehicle} />
+              <VehicleCard 
+                key={vehicle.id} 
+                vehicle={vehicle} 
+                onClick={() => onSelectVehicle(vehicle)}
+              />
             ))
           ) : (
             <div className="text-center py-10 px-4">

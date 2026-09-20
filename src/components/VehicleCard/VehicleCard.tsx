@@ -12,9 +12,10 @@ export interface Vehicle {
 
 interface VehicleCardProps {
   vehicle: Vehicle;
+  onClick?: () => void;
 }
 
-export const VehicleCard = ({ vehicle }: VehicleCardProps) => {
+export const VehicleCard = ({ vehicle, onClick }: VehicleCardProps) => {
   const isScooter = vehicle.type === 'Scooter';
 
   return (
@@ -61,7 +62,10 @@ export const VehicleCard = ({ vehicle }: VehicleCardProps) => {
       </div>
 
       {/* Action button */}
-      <button className="w-full bg-uv-blue text-white font-semibold py-3 rounded-xl hover:bg-blue-800 transition-colors">
+      <button 
+        onClick={onClick}
+        className="w-full bg-uv-blue text-white font-semibold py-3 rounded-xl hover:bg-blue-800 transition-colors"
+      >
         Ver Detalles
       </button>
     </div>
