@@ -6,9 +6,11 @@ import { HiOutlineLocationMarker, HiInformationCircle } from 'react-icons/hi';
 interface VehicleDetailsPageProps {
   vehicle: Vehicle;
   onBack: () => void;
+  onConfirm: () => void;
+  onFailed: () => void;
 }
 
-export const VehicleDetailsPage = ({ vehicle, onBack }: VehicleDetailsPageProps) => {
+export const VehicleDetailsPage = ({ vehicle, onBack, onConfirm, onFailed }: VehicleDetailsPageProps) => {
   const isScooter = vehicle.type === 'Scooter';
 
   return (
@@ -84,14 +86,27 @@ export const VehicleDetailsPage = ({ vehicle, onBack }: VehicleDetailsPageProps)
 
         {/* Action Buttons */}
         <div className="px-4 mt-8 flex flex-col gap-3">
-          <button className="w-full bg-uv-blue text-white font-semibold py-3.5 rounded-xl hover:bg-blue-800 transition-colors">
+          <button 
+            onClick={onConfirm}
+            className="w-full bg-uv-blue text-white font-semibold py-3.5 rounded-xl hover:bg-blue-800 transition-colors"
+          >
             Confirmar Reservación
           </button>
           <button 
             onClick={onBack}
-            className="w-full bg-red-50 text-red-600 font-bold py-3.5 rounded-xl hover:bg-red-100 transition-colors"
+            className="w-full bg-uv-red-dark text-white font-semibold py-3.5 rounded-xl hover:opacity-90 transition-opacity"
           >
             Cancelar
+          </button>
+        </div>
+
+        {/* Prototipo: simular falla */}
+        <div className="px-4 mt-4 text-center">
+          <button
+            onClick={onFailed}
+            className="text-xs text-uv-text-sub underline hover:text-uv-text-main transition-colors"
+          >
+            Simular: vehículo reservado por otro usuario &rarr;
           </button>
         </div>
       </div>

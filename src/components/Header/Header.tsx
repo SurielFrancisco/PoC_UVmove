@@ -22,7 +22,7 @@ export const Header = ({ showBack, onBack }: HeaderProps) => {
             <div className="w-8 h-8 bg-uv-blue rounded flex items-center justify-center">
               <span className="text-white font-bold text-sm tracking-tighter">UV</span>
             </div>
-            <h1 className="text-lg font-bold text-uv-text-main">Move</h1>
+            <h1 className="text-lg font-bold text-uv-text-main">UV Move</h1>
           </>
         )}
       </div>
