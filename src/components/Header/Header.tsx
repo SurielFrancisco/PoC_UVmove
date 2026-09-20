@@ -1,4 +1,5 @@
-import { FaCircle, FaChevronLeft } from 'react-icons/fa';
+import { FaCircle, FaChevronLeft, FaSignOutAlt } from 'react-icons/fa';
+import { useAuth } from '../../context/AuthContext';
 
 interface HeaderProps {
   showBack?: boolean;
@@ -6,6 +7,7 @@ interface HeaderProps {
 }
 
 export const Header = ({ showBack, onBack }: HeaderProps) => {
+  const { session, signOut } = useAuth();
   return (
     <header className="flex items-center justify-between px-4 py-4 bg-uv-bg border-b border-uv-border sticky top-0 z-10">
       <div className="flex items-center gap-2">
@@ -26,9 +28,20 @@ export const Header = ({ showBack, onBack }: HeaderProps) => {
           </>
         )}
       </div>
-      <div className="flex items-center gap-1.5 px-3 py-1 bg-white rounded-full border border-uv-border shadow-sm">
-        <FaCircle className="text-[8px] text-uv-green" />
-        <span className="text-sm font-medium text-uv-blue">Activo</span>
+      <div className="flex items-center gap-3">
+        <div className="flex items-center gap-1.5 px-3 py-1 bg-white rounded-full border border-uv-border shadow-sm">
+          <FaCircle className="text-[8px] text-uv-green" />
+          <span className="text-sm font-medium text-uv-blue">Activo</span>
+        </div>
+        {session && (
+          <button 
+            onClick={signOut}
+            className="p-2 text-uv-text-sub hover:text-red-500 transition-colors rounded-full hover:bg-red-50"
+            title="Cerrar Sesión"
+          >
+            <FaSignOutAlt />
+          </button>
+        )}
       </div>
     </header>
   );

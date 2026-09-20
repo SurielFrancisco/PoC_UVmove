@@ -1,5 +1,5 @@
 import { Header } from '../../components/Header/Header';
-import { type Vehicle } from '../../components/VehicleCard/VehicleCard';
+import { type Vehicle } from '../../types/vehicle';
 import { MdElectricScooter, MdPedalBike } from 'react-icons/md';
 import { HiOutlineLocationMarker, HiInformationCircle } from 'react-icons/hi';
 
@@ -94,7 +94,7 @@ export const VehicleDetailsPage = ({ vehicle, onBack, onConfirm, onFailed }: Veh
           </button>
           <button 
             onClick={onBack}
-            className="w-full bg-uv-red-dark text-white font-semibold py-3.5 rounded-xl hover:opacity-90 transition-opacity"
+            className="btn-red"
           >
             Cancelar
           </button>

@@ -1,5 +1,5 @@
 import { Header } from '../../components/Header/Header';
-import { type Vehicle } from '../../components/VehicleCard/VehicleCard';
+import { type Vehicle } from '../../types/vehicle';
 import { MdElectricScooter, MdPedalBike } from 'react-icons/md';
 import { HiOutlineLocationMarker } from 'react-icons/hi';
 import { FaTimes } from 'react-icons/fa';

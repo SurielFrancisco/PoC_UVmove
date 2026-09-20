@@ -11,6 +11,8 @@ export default {
         'uv-blue': '#0044A5',
         'uv-green': '#43A047',
         'uv-green-light': '#E8F5E9',
+        'uv-green-dark': '#2E7D32',
+        'uv-red-dark': '#C62828',
         'uv-text-main': '#1F2937',
         'uv-text-sub': '#6B7280',
         'uv-border': '#E5E7EB',

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Header } from '../../components/Header/Header';
-import { type Vehicle } from '../../components/VehicleCard/VehicleCard';
+import { type Vehicle } from '../../types/vehicle';
 import { MdElectricScooter, MdPedalBike } from 'react-icons/md';
 import { HiOutlineLocationMarker } from 'react-icons/hi';
 import { FaCheck } from 'react-icons/fa';
@@ -8,13 +8,14 @@ import { FaCheck } from 'react-icons/fa';
 interface ActiveReservationPageProps {
   vehicle: Vehicle;
   onCancel: () => void;
+  onStartTrip: () => void;
 }
 
 const TOTAL_SECONDS = 10 * 60; // 10 minutos
 const RADIUS = 80;
 const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
 
-export const ActiveReservationPage = ({ vehicle, onCancel }: ActiveReservationPageProps) => {
+export const ActiveReservationPage = ({ vehicle, onCancel, onStartTrip }: ActiveReservationPageProps) => {
   const isScooter = vehicle.type === 'Scooter';
   const [secondsLeft, setSecondsLeft] = useState(TOTAL_SECONDS);
 
@@ -43,8 +44,8 @@ export const ActiveReservationPage = ({ vehicle, onCancel }: ActiveReservationPa
 
         {/* Success Header */}
         <div className="flex flex-col items-center mt-10 mb-8 px-4 text-center">
-          <div style={{ backgroundColor: '#F0FDF4', width: 56, height: 56, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem' }}>
-            <FaCheck style={{ fontSize: 22, color: '#22c55e' }} />
+          <div className="w-14 h-14 bg-green-50 rounded-full flex items-center justify-center mb-4">
+            <FaCheck className="text-2xl text-green-500" />
           </div>
           <h2 className="text-2xl font-extrabold text-uv-text-main mb-1">Reservación Activa</h2>
           <p className="text-uv-text-sub text-base">Tu vehículo está reservado</p>
@@ -56,11 +57,11 @@ export const ActiveReservationPage = ({ vehicle, onCancel }: ActiveReservationPa
             <h3 className="text-xs font-bold text-uv-text-sub tracking-wider mb-6 uppercase">Tiempo Restante</h3>
 
             {/* Circular Timer */}
-            <div style={{ position: 'relative', width: 200, height: 200, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.5rem' }}>
+            <div className="relative w-[200px] h-[200px] flex items-center justify-center mb-6">
               <svg
                 width="200"
                 height="200"
-                style={{ position: 'absolute', top: 0, left: 0, transform: 'rotate(-90deg)' }}
+                className="absolute top-0 left-0 -rotate-90"
               >
                 {/* Track background */}
                 <circle
@@ -85,8 +86,8 @@ export const ActiveReservationPage = ({ vehicle, onCancel }: ActiveReservationPa
                   style={{ transition: 'stroke-dashoffset 1s linear' }}
                 />
               </svg>
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', zIndex: 1 }}>
-                <span style={{ fontSize: 44, fontWeight: 900, color: '#1F2937', fontFamily: 'monospace', letterSpacing: '-2px', lineHeight: 1 }}>
+              <div className="z-10 flex flex-col items-center">
+                <span className="text-5xl font-black text-uv-text-main font-mono tracking-tighter leading-none">
                   {minutes}:{seconds}
                 </span>
                 <span className="text-sm text-uv-text-sub font-medium mt-1">minutos</span>
@@ -103,7 +104,7 @@ export const ActiveReservationPage = ({ vehicle, onCancel }: ActiveReservationPa
           {/* Vehicle Summary Card */}
           <div className="bg-white rounded-2xl p-5 shadow-sm border border-uv-border">
             <div className="flex items-center gap-4 mb-4 pb-4 border-b border-uv-border">
-              <div style={{ width: 48, height: 48, borderRadius: 12, backgroundColor: '#0044A5', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 24 }}>
+              <div className="w-12 h-12 rounded-xl bg-uv-blue text-white flex items-center justify-center text-2xl">
                 {isScooter ? <MdElectricScooter /> : <MdPedalBike />}
               </div>
               <div>
@@ -124,14 +125,15 @@ export const ActiveReservationPage = ({ vehicle, onCancel }: ActiveReservationPa
 
         {/* Action Buttons */}
         <div className="px-4 mt-8 flex flex-col gap-3">
-          <button
-            style={{ width: '100%', backgroundColor: '#2E7D32', color: 'white', fontWeight: 600, padding: '14px', borderRadius: 12, border: 'none', cursor: 'pointer', fontSize: 16 }}
+          <button 
+            onClick={onStartTrip}
+            className="btn-green"
           >
             Iniciar Viaje
           </button>
           <button
             onClick={onCancel}
-            style={{ width: '100%', backgroundColor: '#C62828', color: 'white', fontWeight: 600, padding: '14px', borderRadius: 12, border: 'none', cursor: 'pointer', fontSize: 16 }}
+            className="btn-red"
           >
             Cancelar Reservación
           </button>

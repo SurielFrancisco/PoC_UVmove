@@ -1,14 +1,9 @@
 import { MdElectricScooter, MdPedalBike } from 'react-icons/md';
 import { HiOutlineLocationMarker } from 'react-icons/hi';
 import { HiLightningBolt } from 'react-icons/hi';
+import { type Vehicle } from '../../types/vehicle';
 
-export interface Vehicle {
-  id: string;
-  type: 'Scooter' | 'Bicicleta';
-  status: 'DISPONIBLE' | 'OCUPADO';
-  location: string;
-  batteryLevel?: number; // Only for scooters
-}
+export type { Vehicle };
 
 interface VehicleCardProps {
   vehicle: Vehicle;

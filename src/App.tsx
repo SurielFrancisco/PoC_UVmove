@@ -1,13 +1,17 @@
 import { useState } from 'react';
+import { useAuth } from './context/AuthContext';
+import { LoginPage } from './pages/LoginPage/LoginPage';
 import { VehiclesPage } from './pages/VehiclesPage/VehiclesPage';
 import { VehicleDetailsPage } from './pages/VehicleDetailsPage/VehicleDetailsPage';
 import { ActiveReservationPage } from './pages/ActiveReservationPage/ActiveReservationPage';
+import { ActiveTripPage } from './pages/ActiveTripPage/ActiveTripPage';
 import { FailedReservationPage } from './pages/FailedReservationPage/FailedReservationPage';
-import { type Vehicle } from './components/VehicleCard/VehicleCard';
+import { type Vehicle } from './types/vehicle';
 
-type ViewState = 'list' | 'details' | 'reservation' | 'failed';
+type ViewState = 'list' | 'details' | 'reservation' | 'failed' | 'trip';
 
 function App() {
+  const { session, loading } = useAuth();
   const [selectedVehicle, setSelectedVehicle] = useState<Vehicle | null>(null);
   const [view, setView] = useState<ViewState>('list');
 
@@ -26,6 +30,16 @@ function App() {
       <ActiveReservationPage
         vehicle={selectedVehicle}
         onCancel={goToList}
+        onStartTrip={() => setView('trip')}
+      />
+    );
+  }
+
+  if (view === 'trip' && selectedVehicle) {
+    return (
+      <ActiveTripPage
+        vehicle={selectedVehicle}
+        onEndTrip={goToList}
       />
     );
   }
@@ -48,6 +62,18 @@ function App() {
         onFailed={() => setView('failed')}
       />
     );
+  }
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-uv-bg flex items-center justify-center text-uv-text-sub font-medium">
+        Cargando sesión...
+      </div>
+    );
+  }
+
+  if (!session) {
+    return <LoginPage />;
   }
 
   return (

@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { Header } from '../../components/Header/Header';
 import { Filters } from '../../components/Filters/Filters';
-import { VehicleCard, type Vehicle } from '../../components/VehicleCard/VehicleCard';
+import { VehicleCard } from '../../components/VehicleCard/VehicleCard';
+import { type Vehicle } from '../../types/vehicle';
 
 const mockVehicles: Vehicle[] = [
   {

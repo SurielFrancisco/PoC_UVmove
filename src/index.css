@@ -7,3 +7,34 @@
     @apply bg-uv-bg text-uv-text-main font-sans antialiased;
   }
 }
+
+@layer components {
+  .btn-green {
+    background-color: #2E7D32;
+    color: white;
+    font-weight: 600;
+    padding: 14px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+  }
+  .btn-green:hover {
+    background-color: #1B5E20;
+  }
+  .btn-red {
+    background-color: #C62828;
+    color: white;
+    font-weight: 600;
+    padding: 14px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+  }
+  .btn-red:hover {
+    background-color: #B71C1C;
+  }
+}
